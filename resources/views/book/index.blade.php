@@ -13,6 +13,7 @@
         <th>شناسه</th>
         <th>عنوان</th>
         <th>تاریخ ایجاد</th>
+        <th>ویرایش</th>
         <th>حذف</th>
       </tr>
     </thead>
@@ -20,8 +21,9 @@
 		@foreach($books as $book) 
 		<tr>  
 			<td>{{$book->id}}</td>
-			<td><a href="{{route('showbook',['book'=>$book->id])}}">{{$book->onvan}}</a></td>
+			<td><a href="{{route('showbook', $book)}}">{{$book->onvan}}</a></td>
 			<td>{{$book->created_at->toJalali()->format('H:i:s -- Y/m/d')}}</td>
+			<td><a href="{{route('editbook', $book)}}">ویرایش</a></td>
 			<td>
 				<form action="{{ route('deletebook', $book) }}" method="POST">
 					@csrf

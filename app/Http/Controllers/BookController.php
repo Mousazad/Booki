@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -13,14 +13,17 @@ class BookController extends Controller
 		$b = Book::all();
 		return view('book.index', ['books' => $b, 'user' => $user]);
 	}
-	
-	public function show(Book $book){
-		return view('book.show', ['book' => $book]);
+
+    public function edit(Book $book)
+	{
+		return view('book.edit', ['book' => $book]);
 	}
 	
-	public function destroy(Book $book)
+	public function update(Request $request, Book $book)
 	{
-		$book->delete();
-		return Redirect::back();
+		$book->onvan = $request->new_title;
+		$book->update();
+		
+		return Redirect::back()->with('message','به روزرسانی انجام شد.');
 	}
 }
