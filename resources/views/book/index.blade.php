@@ -17,7 +17,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>شناسه</th>
+        <th>ردیف</th>
         <th>عنوان</th>
         <th>تاریخ ایجاد</th>
         <th>ویرایش</th>
