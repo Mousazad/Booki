@@ -6,18 +6,14 @@
 
 <div class="container mt-3">
   @if(session()->has('message')) 
-	<div class="toast show">
-		<div class="toast-header">
-			<button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-		</div>
-		<div class="toast-body">
-			 <p style="color:green">{{session('message')}}</p>
-		</div>
+	<div class="alert alert-success alert-dismissible" style="font-size:90%; width:40%;">
+		<button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+		<strong>موفق!</strong> {{session('message')}}
 	</div>
   @endif
 
-  <h2>ویرایش مشخصات کتاب</h2>
-  <p>مشخصات کتاب را در اینجا ویرایش کنید:</p>            
+	<h2>ویرایش مشخصات کتاب</h2>
+	<p>مشخصات کتاب را در اینجا ویرایش کنید:</p>            
 	<form method='POST' action="{{route('updatebook',$book)}}">
 	@csrf
 	@method('PATCH')

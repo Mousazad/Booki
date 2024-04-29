@@ -16,6 +16,7 @@ Route::get('/book/{book}', [BookController::class, 'show'])->name('showbook');
 Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('deletebook');
 Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
 Route::patch('/book/{book}', [BookController::class, 'update'])->name('updatebook');
+Route::post('/book', [BookController::class, 'store'])->name('insertbook');
 
 Route::get('/author', [AuthorController::class, 'index']);
 
