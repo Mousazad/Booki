@@ -24,10 +24,12 @@
         <th>حذف</th>
       </tr>
     </thead>
-    <tbody>
-		@foreach($books as $book) 
+    <tbody>		
+		@php ($i=0)
+		@foreach($books as $book)
+		@php ($i++)
 		<tr>  
-			<td>{{$book->id}}</td>
+			<td>{{$i}}</td>
 			<td><a href="{{route('showbook', $book)}}">{{$book->onvan}}</a></td>
 			<td>{{$book->created_at->toJalali()->format('H:i:s -- Y/m/d')}}</td>
 			<td><a href="{{route('editbook', $book)}}">ویرایش</a></td>
