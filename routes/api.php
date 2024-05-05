@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\UserController;
 
 
 Route::get('/user', function (Request $request) {
@@ -20,4 +21,6 @@ Route::post('/sum', function (Request $request) {
 	return $a+$b;
 });
 
-Route::post('/book/get', [BookController::class, 'get']);
+Route::post('/login', [UserController::class, 'login']);
+
+Route::post('/book/get', [BookController::class, 'get'])->middleware('auth:sanctum');
