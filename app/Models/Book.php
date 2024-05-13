@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-	protected $fillable = ['onvan'];
+    protected $fillable = ['onvan'];
+
+    public function authors()
+    {
+        return $this->belongsToMany('App\Models\Author');
+    }
 }

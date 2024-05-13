@@ -18,11 +18,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-	 
-	 public function phone(){
-		return $this->hasOne('App\Models\Phone');
-	 }
-	 
+
+    public function phones()
+    {
+        return $this->hasMany('App\Models\Phone');
+    }
+
     protected $fillable = [
         'name',
         'email',

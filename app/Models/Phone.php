@@ -14,4 +14,8 @@ class Phone extends Model
         'operator',
         'active',
     ];
+	
+	 public function user(){
+		return $this->belongsTo('App\Models\User');
+	 }
 }
