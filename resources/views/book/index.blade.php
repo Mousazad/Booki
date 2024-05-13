@@ -5,7 +5,7 @@
 @section('mohtava')
 
 <div class="container mt-3">
- @if(session()->has('message')) 
+ @if(session()->has('message'))
 	<div class="alert alert-danger alert-dismissible" style="font-size:90%; width:40%;">
 		<button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
 		<strong>موفق!</strong> {{session('message')}}
@@ -13,8 +13,8 @@
  @endif
 
   <h2>لیست کتاب ها</h2>
-  <p>لیست تمامی کتاب ها که در پایگاه داده ما هستند به شرح زیر است: </p>            
-  <table class="table table-hover">
+  <p>لیست تمامی کتاب ها که در پایگاه داده ما هستند به شرح زیر است: </p>
+  <table class="table table-hover align-middle">
     <thead>
       <tr>
         <th>ردیف</th>
@@ -24,20 +24,18 @@
         <th>حذف</th>
       </tr>
     </thead>
-    <tbody>		
-		@php ($i=0)
+    <tbody>
 		@foreach($books as $book)
-		@php ($i++)
-		<tr>  
-			<td>{{$i}}</td>
+		<tr>
+			<td>{{$loop->iteration}}</td>
 			<td><a href="{{route('showbook', $book)}}">{{$book->onvan}}</a></td>
 			<td>{{$book->created_at->toJalali()->format('H:i:s -- Y/m/d')}}</td>
 			<td><a href="{{route('editbook', $book)}}">ویرایش</a></td>
 			<td>
-				<form action="{{ route('deletebook', $book) }}" method="POST">
+				<form class="mb-0" action="{{ route('deletebook', $book) }}" method="POST">
 					@csrf
 					@method('DELETE')
-					<button type="submit" class="btn btn-danger btn-sm" style="font-size:80%; margin-bottom: -15px; ">حذف</button>
+					<button type="submit" class="btn btn-danger btn-sm" style="font-size:80%; ">حذف</button>
 				</form>
 			</td>
 		</tr>
@@ -45,8 +43,8 @@
     </tbody>
   </table>
   <hr>
-  
-   @if(session()->has('insert_message')) 
+
+   @if(session()->has('insert_message'))
 	<div class="alert alert-success alert-dismissible" style="font-size:90%; width:40%;">
 		<button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
 		<strong>موفق!</strong> {{session('insert_message')}}
@@ -54,12 +52,12 @@
   @endif
 
   <h2>افزودن کتاب جدید</h2>
-	<p>مشخصات کتاب مورد نظر را وارد کنید:</p>            
+	<p>مشخصات کتاب مورد نظر را وارد کنید:</p>
 	<form method='POST' action="{{route('insertbook')}}">
 	@csrf
 	  <table class="table">
 		<tbody>
-			<tr>  
+			<tr>
 				<td>عنوان</td>
 				<td>
 					<input name='title' placeholder="عنوان کتاب"><br><br>
@@ -72,11 +70,11 @@
 				<p style="color:red">{{$error}}</p>
 			@endforeach
 		@endif
-	  
+
 	  <button type="submit" class="btn btn-success" style="">ثبت</button>
 	</form>
-  
-  
+
+
 </div>
 
 @endsection
