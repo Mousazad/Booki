@@ -34,13 +34,13 @@
 
 	<h2>ویرایش نویسندگان کتاب</h2>
 	<p>🔸 نویسندگان کتاب را در اینجا می بینید:</p>
-	<table style="border-collapse:separate;  border-spacing: 0 1em;" class="table table-sm">
+	<table class="table table-sm align-middle">
 		<tbody>
 			@foreach ($book->authors as $author)
-			<tr style="line-height: 15px;   min-height: 15px;   height: 15px;">
+			<tr>
 				<td>{{$author->name}}</td>
 				<td>
-					<form id="detach_form" action="{{ route('detachbookauthor') }}" method="POST">
+					<form id="detach_form" action="{{ route('detachbookauthor') }}" method="POST" class="mb-0">
 						@csrf
 						<input type="hidden" name="book_id" value="{{$book->id}}">
 						<input type="hidden" name="author_id" value="{{$author->id}}">
