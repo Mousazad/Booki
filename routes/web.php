@@ -17,6 +17,7 @@ Route::middleware('auth')->delete('/book/{book}', [BookController::class, 'destr
 Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
 Route::patch('/book/{book}', [BookController::class, 'update'])->name('updatebook');
 Route::post('/book', [BookController::class, 'store'])->name('insertbook');
+Route::post('/book/detach', [BookController::class, 'detach_author'])->name('detachbookauthor');
 
 Route::get('/author', [AuthorController::class, 'index']);
 
@@ -30,4 +31,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

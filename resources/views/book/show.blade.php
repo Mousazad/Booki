@@ -27,7 +27,19 @@
 			</tr>
 			<tr>
 				<td>نویسندگان</td>
-
+				<td>
+					@if($book->authors->count() > 1)
+					<ul>
+						@foreach ($book->authors as $author)
+						<li>{{$author->name}}</li>
+						@endforeach
+					</ul>
+					@else
+					@foreach ($book->authors as $author)
+					{{$author->name}}
+					@endforeach
+					@endif
+				</td>
 			</tr>
 		</tbody>
 	</table>
