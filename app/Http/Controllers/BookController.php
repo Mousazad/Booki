@@ -69,4 +69,19 @@ class BookController extends Controller
 
 		return Redirect::back();
 	}
+
+	public function attach_author(Request $request)
+	{
+		$request->validate(
+			[
+				'author_id' => 'required|int|min:1',
+				'book_id' => 'required|int|min:1',
+			]
+		);
+		$book = Book::with('authors')->find($request->book_id);
+		if ($book->authors->where('id', $request->author_id)->count() == 0)
+			$book->authors()->attach($request->author_id);
+
+		return Redirect::back();
+	}
 }

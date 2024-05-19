@@ -7,14 +7,27 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+
+    public function search(Request $request)
+    {
+        $request->validate(
+            [
+                'key' => 'required|string|min:1',
+            ]
+        );
+        $key = $request->key;
+        $result = Author::where('name', 'like', '%' . $key . '%')->get();
+        return $result;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $user = auth()->user();
-		$a = Author::all();
-		return view('author.index', ['authors' => $a, 'user' => $user]);
+        $a = Author::all();
+        return view('author.index', ['authors' => $a, 'user' => $user]);
     }
 
     /**

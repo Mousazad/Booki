@@ -18,8 +18,10 @@ Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('editbook
 Route::patch('/book/{book}', [BookController::class, 'update'])->name('updatebook');
 Route::post('/book', [BookController::class, 'store'])->name('insertbook');
 Route::post('/book/detach', [BookController::class, 'detach_author'])->name('detachbookauthor');
+Route::post('/book/attach', [BookController::class, 'attach_author'])->name('attachbookauthor');
 
 Route::get('/author', [AuthorController::class, 'index']);
+Route::post('/author/search', [AuthorController::class, 'search'])->name('searchauthor');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
