@@ -7,6 +7,7 @@
 <div class="container mt-3">
 	<h2>مشخصات کتاب</h2>
 	<p>مشخصات کتاب به شرح زیر است: </p>
+	<img src="{{ Storage::url('cover/'.$book->filename)}}" alt=" cover image" width="250">
 	<table class="table table-hover">
 		<tbody>
 			<tr>

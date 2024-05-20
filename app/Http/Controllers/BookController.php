@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Storage;
+use Nette\Utils\Random;
 
 class BookController extends Controller
 {
@@ -32,13 +34,19 @@ class BookController extends Controller
 		$request->validate(
 			[
 				'title' => 'required|string|max:255|min:4',
+				'cover' => 'required|mimes:jpg,jpeg,gif,bmp,png|max:2048',
 			],
 			[
 				'title.min' => 'تعداد حروف عنوان نمی تواند کمتر از 4 باشد.',
 			]
 		);
 
-		Book::create(['onvan' => $request->title]);
+		$coverfile = $request->file('cover');
+		$filename = $coverfile->getClientOriginalName();
+		$newfilename = sha1(time() . rand(1000000, 9999999) . $filename) . '.' . $coverfile->extension();
+		Storage::putFileAs('public/cover', $coverfile, $newfilename);
+
+		Book::create(['onvan' => $request->title, 'filename' => $newfilename]);
 
 		return Redirect::back()->with('insert_message', 'اضافه کردن کتاب با موفقیت انجام شد.');
 	}
