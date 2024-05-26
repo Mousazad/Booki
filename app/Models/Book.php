@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['onvan', 'filename'];
+    protected $fillable = ['onvan', 'created_by', 'filename'];
 
     public function authors()
     {

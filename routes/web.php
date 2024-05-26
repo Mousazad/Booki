@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckAdmin;
 use App\Models\Book;
 use App\Models\Author;
 
@@ -13,10 +14,10 @@ Route::get('/', function () {
 
 Route::get('/book', [BookController::class, 'index']);
 Route::get('/book/{book}', [BookController::class, 'show'])->name('showbook');
-Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('deletebook');
+Route::middleware(['auth',CheckAdmin::class])->delete('/book/{book}', [BookController::class, 'destroy'])->name('deletebook');
 Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
-Route::patch('/book/{book}', [BookController::class, 'update'])->name('updatebook');
-Route::post('/book', [BookController::class, 'store'])->name('insertbook');
+Route::middleware('auth')->patch('/book/{book}', [BookController::class, 'update'])->name('updatebook');
+Route::middleware('auth')->post('/book', [BookController::class, 'store'])->name('insertbook');
 Route::post('/book/detach', [BookController::class, 'detach_author'])->name('detachbookauthor');
 Route::post('/book/attach', [BookController::class, 'attach_author'])->name('attachbookauthor');
 

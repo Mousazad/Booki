@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use Illuminate\Support\Facades\Storage;
 use Nette\Utils\Random;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -46,13 +47,22 @@ class BookController extends Controller
 		$newfilename = sha1(time() . rand(1000000, 9999999) . $filename) . '.' . $coverfile->extension();
 		Storage::putFileAs('public/cover', $coverfile, $newfilename);
 
-		Book::create(['onvan' => $request->title, 'filename' => $newfilename]);
+		Book::create(['onvan' => $request->title, 'created_by'=> auth()->user()->id, 'filename' => $newfilename]);
 
 		return Redirect::back()->with('insert_message', 'اضافه کردن کتاب با موفقیت انجام شد.');
 	}
 
 	public function update(Request $request, Book $book)
 	{
+				
+        // if (! Gate::allows('update-book', $book)) {
+        //		 abort(403);
+        // }			
+
+        if ($request->user()->cannot('update', $book)) {
+            abort(403);
+        }
+ 		
 		$book->onvan = $request->new_title;
 		$book->update();
 
